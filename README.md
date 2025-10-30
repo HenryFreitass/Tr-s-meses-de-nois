@@ -1,4 +1,4 @@
-
+<!DOCTYPE html><html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -249,4 +249,3 @@ footer{ margin-top:20px; color:#8a6d5a; font-size:.95rem; z-index:3 }
 
 </script></body>
 </html>
-
