@@ -1,1 +1,252 @@
 
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vinicius & Mariah — 3 meses</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:#ffd6e0;
+    --rosa-esc:#eaa0bf;
+    --dourado:#c08b13;
+    --texto:#3e2f2a;
+    --card-bg: rgba(255,255,255,0.88);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:'Quicksand',system-ui,Arial;
+    color:var(--texto);
+    background:
+      radial-gradient(circle at 10% 20%, rgba(255,230,240,0.35) 0 8%, transparent 8%),
+      radial-gradient(circle at 90% 80%, rgba(255,245,220,0.25) 0 10%, transparent 10%),
+      linear-gradient(180deg,#fff0f5 0%, #fff9f2 35%, #fffefc 100%);
+    min-height:100vh;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    position:relative;
+  }/* layout */ .wrap{position:relative; z-index:2} section { min-height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:40px 20px; text-align:center; transition: opacity .6s ease, transform .6s ease; position:relative; } .hidden{ opacity:0; transform: translateY(30px); pointer-events:none; }
+
+h1{ font-family:'Dancing Script',cursive; font-size:3rem; color:var(--dourado); text-shadow:0 2px 6px rgba(192,127,20,0.12); margin-bottom:8px;} h2{ color:var(--dourado); margin:8px 0 18px; }
+
+.btn { background: linear-gradient(90deg,#ff9fbf,#ffd98a); border: 2px solid rgba(255,255,255,0.4); padding:12px 26px; border-radius:28px; color: #3b2c2a; font-weight:600; cursor:pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.12); transition: transform .18s ease; } .btn:active{ transform:scale(.98) } .btn + .btn{ margin-left:12px }
+
+/* hearts background (z-index low) */ .hearts { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; } .heart { position:absolute; will-change: transform, opacity; user-select:none; z-index:1; opacity:0; transform: translateY(0) scale(0.6); filter: drop-shadow(0 6px 12px rgba(0,0,0,0.06)); } .heart.emoji{ font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+
+/* card / letter */ .letter { width: min(820px, 94%); max-width:820px; background: var(--card-bg); border-radius:16px; padding:28px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); font-family:'Dancing Script',cursive; font-size:1.12rem; line-height:1.7; color:var(--texto); z-index:3; border: 1px solid rgba(192,137,20,0.08); }
+
+/* timeline */ .timeline { width: min(850px, 96%); background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,250,240,0.92)); padding:18px; border-radius:12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); border: 1px solid rgba(192,137,20,0.06); text-align:left; } .timeline-item{ padding:12px 16px; margin:14px 0; border-left:4px solid var(--dourado); background: rgba(255,255,255,0.6); border-radius:8px; }
+
+/* gallery */ .gallery { width:100%; max-width:1100px; display:flex; flex-wrap:wrap; justify-content:center; gap:18px; padding:10px; } .polaroid { width: 220px; background: #fff; padding:10px 10px 18px 10px; border-radius:8px; box-shadow: 0 8px 22px rgba(0,0,0,0.18), 0 0 0 6px rgba(240,220,170,0.06) inset; transform-origin:center; cursor:pointer; transition: transform .25s ease, box-shadow .25s ease; border: 1px solid rgba(192,137,20,0.06); } .polaroid:hover{ transform: translateY(-6px) rotate(0deg) scale(1.03); box-shadow:0 14px 36px rgba(0,0,0,0.28) } .polaroid img{ display:block; width:100%; height:200px; object-fit:cover; border-radius:6px; border: 6px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.12); } .caption{ margin-top:8px; font-size:0.95rem; color:var(--dourado); font-weight:600; text-align:center; }
+
+/* modal for viewing image */ .modal { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(10,8,6,0.6); z-index:9999; padding:20px; visibility:hidden; opacity:0; transition:opacity .2s ease, visibility .2s; } .modal.show{ visibility:visible; opacity:1; } .modal-content{ max-width:95%; max-height:90%; border-radius:12px; overflow:hidden; background: linear-gradient(180deg,#fff,#fff9); padding:12px; box-shadow:0 10px 40px rgba(0,0,0,0.45); border: 3px solid rgba(192,137,20,0.18); } .modal-content img{ display:block; max-width:100%; height:auto; border-radius:8px; }
+
+/* video */ .video-wrap{ width: 60%; max-width:920px; min-width:320px; background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,250,245,0.95)); padding:10px; border-radius:12px; box-shadow: 0 12px 30px rgba(0,0,0,0.12); border: 2px solid rgba(192,137,20,0.12); } .video-wrap video{ width:100%; height:auto; display:block; border-radius:8px; }
+
+/* pulsing heart counter */ .counter-heart{ width:260px; height:260px; border-radius:50%; background: radial-gradient(circle at 30% 30%, #fff7f8 0 30%, #ffe8ef 60%, #ffdff0 100%); display:flex; align-items:center; justify-content:center; box-shadow: 0 10px 30px rgba(192,137,20,0.08), 0 0 0 10px rgba(240,220,170,0.04) inset; border: 3px solid rgba(192,137,20,0.12); animation: pulse 1.2s infinite; } @keyframes pulse{0%{ transform: scale(1) }50%{ transform: scale(1.05) }100%{ transform: scale(1) }} .counter-heart .text{ font-family:'Dancing Script',cursive; font-size:1.05rem; color:var(--dourado); text-align:center; line-height:1.25; padding:12px; }
+
+footer{ margin-top:20px; color:#8a6d5a; font-size:.95rem; z-index:3 }
+
+/* responsive */ @media (max-width:900px){ .polaroid{ width:45%; } .video-wrap{ width:92%; } .gallery{ gap:12px; } } @media (max-width:480px){ h1{ font-size:2.2rem; } .polaroid{ width:100%; } .gallery{ padding:0 } .counter-heart{ width:200px; height:200px; } } </style>
+
+</head>
+<body> <!-- hearts container (background animation) --> <div class="hearts" aria-hidden="true"></div> <div class="wrap"> <!-- HOME --> <section id="home">
+    <h1>Vinicius & Mariah</h1>
+    <h2>Três meses de amor, cor e poesia</h2>
+    <div style="display:flex; gap:12px; z-index:3">
+      <button class="btn" onclick="goTo('letter')">Entrar</button>
+      <button class="btn" onclick="goTo('timeline')">Nossa história</button>
+    </div>
+  </section> <!-- LETTER --> <section id="letter" class="hidden">
+    <div class="letter" role="article" aria-label="Carta de Vinicius para Mariah">
+      <p>Minha princesa</p>
+      <p>Três meses parecem muito pouco tempo quando olho pra tudo que a gente já viveu ao lado do outro, cada momento com você tem um jeito único de me fazer sentir completo mesmo nas horas mais simples tudo faz sentido ao seu lado. Eu lembro de cada risada, de cada olhar, e do jeito como tudo parece mais leve quando é com você. Você é minha calma e a minha paz o meu tudo, o som que fica tocando na cabeça mesmo quando o dia é silencioso. Desde que te conheci, muita coisa mudou e entre tantas mudanças, o que mais me marca é como você me faz querer ser melhor. Eu gosto da gente. Gosto do jeito como a gente se entende sem precisar dizer muito, gosto de saber que o que temos é real. Três meses podem parecer o começo, mas pra mim é apenas o início de algo que quero carregar pela eternidade e que vou pois a minha alma anseia pela sua.</p>
+      <p style="text-align:right; font-weight:700;">Com amor, o Amor da sua Vida. 🤍</p>
+    </div>
+    <div style="margin-top:18px; z-index:3">
+      <button class="btn" onclick="goTo('timeline')">Próximo</button>
+    </div>
+  </section> <!-- TIMELINE --> <section id="timeline" class="hidden">
+    <h2>Nossa história</h2>
+    <div class="timeline" role="list">
+      <div class="timeline-item" role="listitem">🌅 <strong>02/08/2025 — 05:00:00</strong> — Nos conhecemos naquela manhã especial.</div>
+      <div class="timeline-item" role="listitem">💖 Início do namoro — 3 meses de descobertas e carinho.</div>
+      <div class="timeline-item" role="listitem">📸 Momentos escritos em fotos, risadas e promessas.
+    <div class="letter" style="max-width:740px;">
+      <h2>Entre o céu e o dourado</h2>
+      <p>O tempo passa, mas o amor não cansa,<br>
+      ele gira como o vento nas estrelas de Van Gogh.</p>
+      <p>Há um brilho que nasce no toque,<br>
+      um universo que cabe no olhar,<br>
+      e em ti, Mariah, o meu mundo inteiro aprendeu a respirar.</p>
+      <p>Se um dia a distância tentar apagar o nosso sol,<br>
+      lembra: a cor que nos une não desbota,<br>
+      ela vive — nas risadas, nos abraços,<br>
+      e nas linhas que o destino desenhou pra nós.</p>
+      <p style="font-weight:700">Porque amar você é pintar o infinito. 🎨🤍</p>
+    </div>
+    <footer>Feito com amor por Vinicius 💖</footer>
+    </div>
+    <div style="margin-top:18px;">
+      <button class="btn" onclick="goTo('gallery')">Ver fotos</button>
+    </div>
+  </section> <!-- GALLERY --> <section id="gallery" class="hidden">
+    <h2>Nossas lembranças</h2>
+    <div class="gallery" id="galleryGrid" aria-label="Galeria de fotos">
+      <!-- polaroids (10 placeholders) -->
+      <div class="polaroid" data-src="foto1.jpg"><img src="foto1.jpg.jpeg" alt="Foto 1"><div class="caption">Foto 1</div></div>
+      <div class="polaroid" data-src="foto2.jpg"><img src="foto2.jpg.jpg" alt="Foto 2"><div class="caption">Foto 2</div></div>
+      <div class="polaroid" data-src="foto3.jpg"><img src="foto3.jpg.jpg" alt="Foto 3"><div class="caption">Foto 3</div></div>
+      <div class="polaroid" data-src="foto4.jpg"><img src="foto4.jpg.jpg" alt="Foto 4"><div class="caption">Foto 4</div></div>
+      <div class="polaroid" data-src="foto5.jpg"><img src="foto5.jpg.jpg" alt="Foto 5"><div class="caption">Foto 5</div></div>
+      <div class="polaroid" data-src="foto6.jpg"><img src="foto6.jpg.jpg" alt="Foto 6"><div class="caption">Foto 6</div></div>
+      <div class="polaroid" data-src="foto7.jpg"><img src="foto7.jpg.jpg" alt="Foto 7"><div class="caption">Foto 7</div></div>
+      <div class="polaroid" data-src="foto8.jpg"><img src="foto8.jpg.jpg" alt="Foto 8"><div class="caption">Foto 8</div></div>
+      <div class="polaroid" data-src="foto9.jpg"><img src="foto9.jpg.jpg" alt="Foto 9"><div class="caption">Foto 9</div></div>
+    </div>
+    <div style="margin-top:18px;">
+      <button class="btn" onclick="goTo('counter')">Próximo</button>
+    </div>
+  </section> <!-- COUNTER heart --> <section id="counter" class="hidden">
+    <h2>Nosso tempo juntos</h2>
+    <div class="counter-heart" aria-live="polite">
+      <div class="text" id="timeText">
+        Carregando...
+      </div>
+    </div>
+    <div style="margin-top:18px;">
+      <button class="btn" onclick="goTo('video')">Assistir vídeo</button>
+    </div>
+  </section> 
+  </section> <!-- VIDEO --> <section id="video" class="hidden">
+    <h2>Nosso vídeo</h2>
+    <div class="video-wrap">
+      <video controls muted id="finalVideo" controls>
+        <source src="video.mp4.mp4" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+    </div>
+    <div style="margin-top:18px;">
+      <button class="btn" onclick="goTo('home')">Voltar ao início</button>
+    </div>
+  </section> <!-- modal for image view --> <div class="modal" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-content" id="modalContent">
+      <img id="modalImage" src="" alt="Foto ampliada">
+    </div>
+  </div> <!-- audio (nome: musica.mp3) --><audio id="bgMusic" src="music.mp3.mp3" preload="auto" loop></audio>
+
+  </div> <!-- /.wrap --><script>
+  // ---------- navigation between sections ----------
+  const sections = ['home','letter','timeline','gallery','counter','poem','video'];
+  function goTo(id){
+    sections.forEach(s=>{
+      const el = document.getElementById(s);
+      if(!el) return;
+      if(s===id){ el.classList.remove('hidden'); el.style.pointerEvents = 'auto'; }
+      else { el.classList.add('hidden'); el.style.pointerEvents = 'none'; }
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
+
+    // try to play music when entering letter (user gesture may be required)
+    if(id === 'letter'){
+      const m = document.getElementById('bgMusic');
+      if(m && m.paused){ m.play().catch(()=>{/* autoplay blocked */}); }
+    }
+  }
+
+  // show home initially
+  goTo('home');
+
+  // ---------- hearts floating (pink + dourado) ----------
+  const heartsContainer = document.querySelector('.hearts');
+  function createHeart(){
+    const h = document.createElement('div');
+    h.className = 'heart emoji';
+    // emoji hearts: half pink (💖) half gold (💛)
+    h.textContent = Math.random() < 0.5 ? '💖' : '💛';
+    const size = 14 + Math.random()*36;
+    h.style.fontSize = size + 'px';
+    h.style.left = (Math.random()*100) + 'vw';
+    h.style.bottom = (-8 - Math.random()*20) + 'vh';
+
+    heartsContainer.appendChild(h);
+
+    const travel = 110 + Math.random()*40; // vh
+    const duration = 7000 + Math.random()*9000; // ms
+    const delay = Math.random()*1200;
+
+    const keyframes = [
+      { transform: `translateY(0)`, opacity: 0 },
+      { transform: `translateY(-${travel}vh)`, opacity: 1 },
+      { transform: `translateY(-${travel+30}vh)`, opacity: 0 }
+    ];
+    const anim = h.animate(keyframes, { duration, delay, easing:'cubic-bezier(.2,.8,.2,1)', iterations:1, fill:'forwards' });
+    anim.onfinish = ()=> h.remove();
+  }
+  // spawn hearts continuously but not too many
+  let heartTimer = setInterval(()=>{ if(document.querySelectorAll('.hearts .heart').length < 40) createHeart(); }, 300);
+  // initial burst
+  for(let i=0;i<18;i++) setTimeout(createHeart, i*90);
+
+  // ---------- polaroid rotation and modal ----------
+  const polaroids = document.querySelectorAll('.polaroid');
+  polaroids.forEach(p=>{
+    const rot = (Math.random()*12 - 6);
+    p.style.transform = `rotate(${rot}deg)`;
+    p.addEventListener('click', ()=>{
+      const src = p.getAttribute('data-src') || p.querySelector('img').src;
+      openModal(src);
+    });
+  });
+
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modalImage');
+  function openModal(src){ modalImage.src = src; modal.classList.add('show'); setTimeout(()=>document.addEventListener('click', outsideClick),0); }
+  function closeModal(){ modal.classList.remove('show'); modalImage.src=''; document.removeEventListener('click', outsideClick); }
+  function outsideClick(e){ const content = document.getElementById('modalContent'); if(!content.contains(e.target)) closeModal(); }
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+  document.getElementById('modalContent').addEventListener('click', e=> e.stopPropagation());
+
+  // ---------- counter (accurate months + days) ----------
+  const startDate = new Date(2025,7,2,5,0,0); // 2025-08-02 05:00 local
+  const timeText = document.getElementById('timeText');
+
+  function computeDifference(start, now){
+    let months = (now.getFullYear() - start.getFullYear())*12 + (now.getMonth() - start.getMonth());
+    const tmp = new Date(start.getTime());
+    tmp.setMonth(start.getMonth() + months);
+    if(tmp > now){ months--; tmp.setMonth(start.getMonth()+months); }
+    let diff = now - tmp;
+    const days = Math.floor(diff / (1000*60*60*24));
+    diff -= days * (1000*60*60*24);
+    const hours = Math.floor(diff / (1000*60*60));
+    diff -= hours * (1000*60*60);
+    const minutes = Math.floor(diff / (1000*60));
+    diff -= minutes * (1000*60);
+    const seconds = Math.floor(diff / 1000);
+    return { months, days, hours, minutes, seconds };
+  }
+  function pad(n){ return n.toString().padStart(2,'0'); }
+  function updateCounter(){ const now = new Date(); const d = computeDifference(startDate, now); timeText.innerHTML = `<div style="font-size:1.1rem; font-weight:700">Estamos juntos</div><div style="font-size:1.6rem; margin-top:6px">${d.months} meses</div><div style="margin-top:8px; font-size:1rem">${d.days} dias • ${pad(d.hours)}:${pad(d.minutes)}:${pad(d.seconds)}</div>`; }
+  updateCounter(); setInterval(updateCounter,1000);
+
+  // ---------- music play after first user action if blocked ----------
+  const bgMusic = document.getElementById('bgMusic');
+  function tryPlayMusic(){ if(!bgMusic) return; bgMusic.play().catch(()=>{}); document.removeEventListener('click', tryPlayMusic); document.removeEventListener('keydown', tryPlayMusic); }
+  document.addEventListener('click', tryPlayMusic); document.addEventListener('keydown', tryPlayMusic);
+
+  // ---------- video UX: pause music when video plays ----------
+  const finalVideo = document.getElementById('finalVideo');
+  if(finalVideo){ finalVideo.addEventListener('play', ()=>{ if(bgMusic && !bgMusic.paused) bgMusic.pause(); }); }
+
+  // accessibility: make sections focusable
+  sections.forEach(s=>{ const el=document.getElementById(s); if(el) el.tabIndex=-1; });
+
+  // safety: stop heart spawning when page hidden
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden){ clearInterval(heartTimer); } else { if(!heartTimer) heartTimer = setInterval(()=>{ if(document.querySelectorAll('.hearts .heart').length < 40) createHeart(); },300); }});
+
+</script></body>
+</html>
+
